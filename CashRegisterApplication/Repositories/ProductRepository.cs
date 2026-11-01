@@ -28,7 +28,7 @@ namespace CashRegisterApplication.Repositories
 
         public void LoadFromFile(string filePath)
         {
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 Console.WriteLine("Product file not found");
                 return;
