@@ -20,7 +20,22 @@ namespace CashRegisterApplication.Models
 
         public Product(int id, string name, decimal price, PriceType priceType)
         {
-          
+            if (id == 0) 
+                throw new ArgumentException("Not a valid ID");
+
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Product name is missing");
+
+            if (price < 0)
+                throw new ArgumentException("Product price cann't be negative");
+
+            if (!Enum.IsDefined(typeof(PriceType), priceType))
+                throw new ArgumentException("Invalid price type.");
+
+            Id = id;
+            Name = name;
+            Price = price;
+            PriceType = priceType;
         }
     }
 }
