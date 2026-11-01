@@ -1,1 +1,3 @@
-﻿
+﻿101;Bananas;29.90;Kg
+102;Milk;15.90;Per
+103;Coffee;59.90;Per
