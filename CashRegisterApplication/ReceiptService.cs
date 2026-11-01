@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
+using System.IO;
 
-namespace CashRegisterApplication
+namespace CashRegisterApplication.Services
 {
     public class ReceiptService
     {
@@ -37,7 +38,7 @@ namespace CashRegisterApplication
             File.AppendAllText(filePath, receipt.ToString());
 
             Console.WriteLine(receipt.ToString());
-            Console.WriteLine("Kvittot har sparats.");
+            Console.WriteLine("Receipt saved successfully.");
         }
 
     }

@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Text;
 using CashRegisterApplication.Models;
 using CashRegisterApplication.Repositories;
+using System.IO;
+using CashRegisterApplication.Services;
 
 namespace CashRegisterApplication.UI
 {
@@ -54,15 +56,43 @@ namespace CashRegisterApplication.UI
 
             Console.WriteLine("New customer started");
             Console.WriteLine("Enter product ID and amount, ex. 101 4");
-            Console.WriteLine("Enter BACK to go back to the menu");
+            Console.WriteLine("Enter PAY to pay or BACK to go back to the menu");
 
             while (true)
             {
                 Console.Write("Product: ");
                 string? input = Console.ReadLine();
 
-                if (input == null || input.ToUpper() == "BACK") {
+                if (input == null || input.ToUpper() == "BACK")
+                {
                     break;
+                }
+
+                    if (input.Equals("PAY", StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (sale.GetItems().Count == 0)
+                        {
+                            Console.WriteLine("Sale is empty");
+                            continue;
+                        }
+
+                        try
+                        {
+                            ReceiptService receiptService = new ReceiptService();
+                            receiptService.SaveReceipt(sale);
+                            break;
+                        }
+                        catch (IOException ex)
+                        {
+                            Console.WriteLine($"Could not save the receipt: {ex.Message}");
+                        }
+                        catch (UnauthorizedAccessException ex)
+                        {
+                            Console.WriteLine($"No access to save receipt: {ex.Message}");
+                        }
+                        continue;
+                    }
+
 
                     string[] parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -76,8 +106,9 @@ namespace CashRegisterApplication.UI
                     }
 
                     Product? product = repository.FindById(id);
+               
 
-                    if (product == null)
+                if (product == null)
                     {
                         Console.WriteLine("Product doesn't exist");
                         continue;
@@ -99,4 +130,4 @@ namespace CashRegisterApplication.UI
             }
         }
     } 
-}
+

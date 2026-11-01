@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -20,7 +19,7 @@ namespace CashRegisterApplication.Models
 
         public Product(int id, string name, decimal price, PriceType priceType)
         {
-            if (id == 0) 
+            if (id <= 0) 
                 throw new ArgumentException("Not a valid ID");
 
             if (string.IsNullOrWhiteSpace(name))

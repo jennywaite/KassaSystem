@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="CashRegisterApplication/CashRegisterApplication.csproj" />
+  <Project Path="UnitTest1/UnitTest1.csproj" />
 </Solution>
