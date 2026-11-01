@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CashRegisterApplication.Models;
 
-namespace CashRegisterApplication
+public interface IProductRepository
 {
-    internal class Class1
-    {
-    }
+    Product? FindById(int id);
+    List<Product> GetAllProducts();
 }
